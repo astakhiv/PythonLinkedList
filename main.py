@@ -13,42 +13,36 @@ class LinkedList:
             vals[i-1].next = vals[i]
         self.head = vals[0]
 
-    def insert(self, key: int, value):
-        index = 0
-        for item in self:
-            if index == key:
-                item.val, item.next = value, Node(item.val, item.next)
-                break
-            index += 1
+    def insert(self, index: int, value):
+        item = self.__getitem__(index)
+        item.val, item.next = value, Node(item.val, item.next)
 
     def remove(self, index):
         if index == 0:
             self.head = self.head.next
             return self.head
-        i = 0
-        for item in self:
-            if i == index:
-                self[i-1].next = item.next
-            i += 1
+
+        item = self.__getitem__(index)
+        self[index-1].next = item.next
         return self.head
 
     def __len__(self):
         return self.len
 
-    def __getitem__(self, item):
-        index = 0
-        for i in self:
-            if index == item:
-                return i
-            index += 1
+    def __getitem__(self, index):
+        key = 0
+        for item in self:
+            if key == index:
+                return item
+            key += 1
 
-    def __setitem__(self, key, value):
-        index = 0
-        for i in self:
-            if index == key:
-                i.val = value
+    def __setitem__(self, index, value):
+        key = 0
+        for item in self:
+            if key == index:
+                item.val = value
                 break
-            index += 1
+            key += 1
 
     def __iter__(self):
         self.node = self.head
@@ -61,4 +55,3 @@ class LinkedList:
             return node
         else:
             raise StopIteration
-
