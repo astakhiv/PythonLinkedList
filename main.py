@@ -16,8 +16,10 @@ class LinkedList:
     def insert(self, index: int, value):
         item = self.__getitem__(index)
         item.val, item.next = value, Node(item.val, item.next)
+        self.len += 1
 
     def remove(self, index):
+        self.len -= 1
         if index == 0:
             self.head = self.head.next
             return self.head
